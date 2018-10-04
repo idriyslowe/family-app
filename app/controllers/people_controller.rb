@@ -5,8 +5,18 @@ class PeopleController < ApplicationController
     render json: { data: person }, status: :ok
   end
 
-  def index
-    people = Person.all
+  def gender
+    people = Person.by_gender
+    render json: { data: people }, status: :ok
+  end
+
+  def birthdate
+    people = Person.by_birthdate
+    render json: { data: people }, status: :ok
+  end
+
+  def name
+    people = Person.by_last_name
     render json: { data: people }, status: :ok
   end
 
@@ -21,5 +31,11 @@ class PeopleController < ApplicationController
   end
 end
 
-# QUESTIONS:
-# validations? what input types?
+# returns all records in json format from data you imported in following formats:
+
+# ● Pipe-delimited​:
+# LastName | FirstName | Gender | Favorite Color | Date Of Birth
+# ● Comma-delimited:
+# LastName, FirstName, Gender, Favorite Color, Date Of Birth
+# ● Space-delimited:
+# LastName FirstName Gender FavoriteColor DateOfBirth
