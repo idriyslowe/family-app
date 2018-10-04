@@ -10,7 +10,7 @@ RSpec.describe Person, :type => :model do
         first_name: "ayo",
         gender: "female",
         favorite_color: "blurple",
-        date_of_birth: "August, 17, 1985"
+        date_of_birth: "8/17/1985"
       })
     }
 
@@ -20,7 +20,7 @@ RSpec.describe Person, :type => :model do
         first_name: "Big",
         gender: "male",
         favorite_color: "orange",
-        date_of_birth: "August, 17, 1978"
+        date_of_birth: "8/17/1978"
       })
     }
 
@@ -30,7 +30,7 @@ RSpec.describe Person, :type => :model do
         first_name: "first",
         gender: "female",
         favorite_color: "red",
-        date_of_birth: "August, 17, 1956"
+        date_of_birth: "8/17/1956"
       })
     }
 
@@ -45,10 +45,17 @@ RSpec.describe Person, :type => :model do
         expect(Person.by_gender('female')).not_to include(big_borb)
         expect(Person.by_gender('male')).not_to include(first_zamother)
       end
+    end
 
+    describe "#by_last_name" do
       it "returns record by last name ascending" do
         expect(Person.sort_by_last_name.first.last_name).to eq(big_borb.last_name)
         expect(Person.sort_by_last_name.last.last_name).to eq(first_zamother.last_name)
+      end
+
+      it "returns record by last name descending" do
+        expect(Person.sort_by_last_name('desc').first.last_name).to eq(first_zamother.last_name)
+        expect(Person.sort_by_last_name('desc').last.last_name).to eq(big_borb.last_name)
       end
     end
 
@@ -59,15 +66,10 @@ RSpec.describe Person, :type => :model do
       end
     end
 
-    describe "#by_birthdate" do
-      xit "returns all records sorted by birthdate ascending" do
-        # @@people
-      end
-    end
-
-    describe "#by_last_name" do
-      xit "returns all records sorted by last name descending" do
-        # @@people
+    describe "#sort_by_birthdate" do
+      it "returns all records sorted by birthdate ascending" do
+        expect(Person.sort_by_birthdate.first.date_of_birth).to eq(ayo_sister.date_of_birth)
+        expect(Person.sort_by_birthdate.last.date_of_birth).to eq(first_zamother.date_of_birth)
       end
     end
 

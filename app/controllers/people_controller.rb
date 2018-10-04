@@ -11,22 +11,24 @@ class PeopleController < ApplicationController
   end
 
   def birthdate
-    people = Person.by_birthdate
+    people = Person.sort_by_birthdate
     render json: { data: people }, status: :ok
   end
 
   def name
-    people = Person.by_last_name
+    people = Person.sort_by_last_name('desc')
     render json: { data: people }, status: :ok
   end
 
   def person_attributes
-    params.permit(
-      :last_name,
-      :first_name,
-      :gender,
-      :favorite_color,
-      :date_of_birth
+    params.permit( people:
+      [
+        :last_name,
+        :first_name,
+        :gender,
+        :favorite_color,
+        :date_of_birth
+      ]
     )
   end
 end
