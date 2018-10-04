@@ -28,8 +28,13 @@ class Person
 
     def sort_by_last_name(direction='asc', collection=nil)
       collection ||= @@people
-      collection.sort_by { |p| p.last_name }
-      # collection = collection.reverse if direction == 'desc'
+      collection = collection.sort_by { |p| p.last_name }
+
+      if direction == 'desc'
+        collection = collection.reverse
+      end
+
+      collection
     end
 
     def sort_by_gender_and_name
@@ -52,7 +57,7 @@ class Person
         first_name: "first",
         gender: "female",
         favorite_color: "red",
-        date_of_birth: DateTime.parse("8/17/1956")
+        date_of_birth: "8/17/1956"
       })
 
       Person.new({
@@ -60,7 +65,7 @@ class Person
         first_name: "ayo",
         gender: "female",
         favorite_color: "blurple",
-        date_of_birth: DateTime.parse("8/17/1985")
+        date_of_birth: "8/17/1985"
       })
 
       Person.new({
@@ -68,8 +73,10 @@ class Person
         first_name: "Big",
         gender: "male",
         favorite_color: "orange",
-        date_of_birth: DateTime.parse("8/17/1978")
+        date_of_birth: "8/17/1978"
       })
+
+      return Person.all
     end
   end
 end
