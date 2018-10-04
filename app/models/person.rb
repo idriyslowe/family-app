@@ -1,4 +1,6 @@
 class Person
+  attr_accessor :last_name, :first_name, :gender, :favorite_color, :date_of_birth
+
   @@people = []
 
   def initialize options
@@ -11,24 +13,30 @@ class Person
     @@people << self
   end
 
-  # class << self
-    def self.all
+  class << self
+    def all
       @@people
     end
 
-    def self.by_gender
-      # sorted by gender (females before males) then by last name ascending.
-      self.all
+    def count
+      @@people.count
     end
 
-    def self.by_birthdate
+    def by_gender
+      # sorted by gender (females before males) then by last name ascending.
+      # puts @@people.sort_by { |p| p[:gender] }
+      @@people.sort_by { |p| p.gender }
+    end
+
+    def by_birthdate
       # Output 2 – sorted by birth date, ascending.
       self.all
     end
 
-    def self.by_last_name
+    def by_last_name
+
       # Output 3 – sorted by last name, descending.
       self.all
     end
-  # end
+  end
 end
