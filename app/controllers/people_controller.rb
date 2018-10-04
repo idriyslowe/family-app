@@ -1,8 +1,9 @@
 class PeopleController < ApplicationController
 
   def create
-    person = Person.new(person_attributes)
-    render json: { data: person }, status: :ok
+    create_people
+    people = Person.all
+    render json: { data: people }, status: :ok
   end
 
   def gender
@@ -21,23 +22,21 @@ class PeopleController < ApplicationController
   end
 
   def person_attributes
-    params.permit( people:
-      [
-        :last_name,
-        :first_name,
-        :gender,
-        :favorite_color,
-        :date_of_birth
-      ]
-    )
+    params.require(:people)
+  end
+
+  def create_people
+    attr_arr = nil
+    person_attributes.each do |person_str|
+      attr_arr = person_str.split(/[,\s\|]/).reject(&:empty?)
+      puts attr_arr.inspect
+      Person.new({
+        last_name: attr_arr[0],
+        first_name: attr_arr[1],
+        gender: attr_arr[2],
+        favorite_color: attr_arr[3],
+        date_of_birth: attr_arr[4]
+      })
+    end
   end
 end
-
-# returns all records in json format from data you imported in following formats:
-
-# ● Pipe-delimited​:
-# LastName | FirstName | Gender | Favorite Color | Date Of Birth
-# ● Comma-delimited:
-# LastName, FirstName, Gender, Favorite Color, Date Of Birth
-# ● Space-delimited:
-# LastName FirstName Gender FavoriteColor DateOfBirth

@@ -8,7 +8,7 @@ class Person
     @first_name = options[:first_name]
     @gender = options[:gender]
     @favorite_color = options[:favorite_color]
-    @date_of_birth = DateTime.strptime(options[:date_of_birth], '%m/%d/%Y')
+    @date_of_birth = DateTime.strptime(options[:date_of_birth], '%m/%d/%Y') if options[:date_of_birth]
 
     @@people << self
   end
