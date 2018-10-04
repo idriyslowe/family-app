@@ -2,13 +2,15 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '~> 5.1.5'
-
-gem 'spring', :group => :development
-
-
 gem 'sqlite3'
 
+group :development do
+  gem 'spring'
+end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.8'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
