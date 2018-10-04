@@ -68,8 +68,8 @@ RSpec.describe Person, :type => :model do
 
     describe "#sort_by_birthdate" do
       it "returns all records sorted by birthdate ascending" do
-        expect(Person.sort_by_birthdate.first.date_of_birth).to eq(ayo_sister.date_of_birth)
-        expect(Person.sort_by_birthdate.last.date_of_birth).to eq(first_zamother.date_of_birth)
+        expect(Person.sort_by_birthdate.first.date_of_birth.day).to eq(ayo_sister.date_of_birth.day)
+        expect(Person.sort_by_birthdate.last.date_of_birth.day).to eq(first_zamother.date_of_birth.day)
       end
     end
 
