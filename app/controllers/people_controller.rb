@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   end
 
   def gender
-    people = Person.by_gender
+    people = Person.sort_by_gender_and_name
     render json: { data: people }, status: :ok
   end
 
